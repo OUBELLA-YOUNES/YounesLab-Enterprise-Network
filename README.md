@@ -843,7 +843,7 @@ telephony-service
 
 All screenshots available in the [`/screenshots`](screenshots/) directory.
 
-# 📸 Validation & Proof Screenshots
+#  Validation & Proof Screenshots
 
 All screenshots available in the [`/screenshots`](screenshots/) directory.
 
@@ -927,9 +927,6 @@ All screenshots available in the [`/screenshots`](screenshots/) directory.
 | 59 | Internet Core Default Routes (`show run \| include ip route`) | `screenshots/internet-core-default-routes.png` |
 ---
 
-##  Repository Structure
-
-```
 youneslab-enterprise-network/
 │
 ├── README.md                          ← You are here
@@ -963,16 +960,71 @@ youneslab-enterprise-network/
 │   ├── routers/
 │   │   ├── ISP-1.txt
 │   │   ├── ISP-2.txt
-│   │   └── Voice-CME-2811.txt
+│   │   ├── Voice-CME-2811.txt
+│   │   └── Internet-Core-Router3.txt
 │   └── wireless/
 │       └── WLC-config.txt
 │
 ├── screenshots/
-│   ├── 01-ospf-neighbors.png
-│   ├── 02-ospf-routes.png
-│   ├── 03-isp-failover.png
-│   ├── ...
-│   └── 22-qos.png
+│   ├── ASA-nat.png
+│   ├── acl-ASA.png
+│   ├── ospf-neighbors.png
+│   ├── ospf-routes.png
+│   ├── standby-brief.png
+│   ├── spanningTree-vlan.png
+│   ├── st-summary-root.png
+│   ├── st-summary-acess-sw.png
+│   ├── dmz-proxy.png
+│   ├── raduis-database.png
+│   ├── corp-wifi-success.png
+│   ├── Guest-wifi-success.png
+│   ├── wlc-APs-associations.png
+│   ├── copr-connecting.png
+│   ├── guest-connecting.png
+│   ├── client-association-wlc-gui.png
+│   ├── wlans-wlc-gui.png
+│   ├── raduis-config-on-wlc-gui.png
+│   ├── interfaces-on-wlc-gui.png
+│   ├── dns-records.png
+│   ├── dns-records-on-dmz-proxy.png
+│   ├── dhcp-snooping-binding.png
+│   ├── port-security-interface.png
+│   ├── dhcp-pools+port-sec-interface.png
+│   ├── dhcp-pools.png
+│   ├── ntp-associations.png
+│   ├── ntp-status.png
+│   ├── ntp-service-server.png
+│   ├── clock-updated.png
+│   ├── ssh-config.png
+│   ├── ssh-mgmt-laptop.png
+│   ├── syslog-trigger.png
+│   ├── syslog-server-logs.png
+│   ├── ftp-backup.png
+│   ├── fts-server-database.png
+│   ├── smtp-external.png
+│   ├── smtp-internal.png
+│   ├── snmp-get-sysuptime.png
+│   ├── snmp-get-sysname.png
+│   ├── snmp-get-ifdescr.png
+│   ├── snmp-set-hostname1.png
+│   ├── snmp-set-hostname.png
+│   ├── snmp-set-verify.png
+│   ├── cme-ephone-registered.png
+│   ├── cme-ephone-summary.png
+│   ├── voip-call-dialing.png
+│   ├── voip-call-ringing.png
+│   ├── voip-call-connected.png
+│   ├── qos-access-sw-trust.png
+│   ├── qos-core-policymap.png
+│   ├── qos-bug-dscp-00.png
+│   ├── qos-accesss-port-trust-qos.png
+│   ├── qos-distribution-acl.png
+│   ├── qos-dis-remark.png
+│   ├── qos-core-verify1.png
+│   ├── qos-core-verify2.png
+│   ├── qos-core-dscp-preserved.png
+│   ├── printer-pint-test.png
+│   └── internet-core-default-routes.png
 │
 ├── docs/
 │   ├── challenges-and-solutions.md
@@ -981,9 +1033,6 @@ youneslab-enterprise-network/
 │   └── linkedin-post-series.md
 │
 └── LICENSE
-```
-
----
 
 ##  Getting Started
 
