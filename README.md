@@ -256,6 +256,15 @@ show ip ospf database summary
 
 ##  High Availability & Redundancy
 
+### Dual ISP Redundancy
+  ### Internet Core Router — Default Routes
+
+  The Internet Core Router (Router3) simulates the ISP backbone. It has two default routes for redundancy:
+  
+  
+  ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/0/0      ! Primary (AD 1)
+  ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/1/0 2    ! Backup (AD 2)
+
 ### HSRP Per-VLAN (HSRPv2)
 
 HSRP configured on all distribution switches. Active/standby aligned with STP root.
@@ -834,31 +843,88 @@ telephony-service
 
 All screenshots available in the [`/screenshots`](screenshots/) directory.
 
-| # | Feature | Command | File |
-|---|---------|---------|------|
-| 1 | OSPF Neighbors | `show ip ospf neighbor` | screenshots/01-ospf-neighbors.png |
-| 2 | OSPF Routes | `show ip route ospf` | screenshots/02-ospf-routes.png |
-| 3 | ISP-A Failover | `show ip route` before/after shutdown | screenshots/03-isp-failover.png |
-| 4 | ASA ACL — Permit | External → DMZ ping success | screenshots/04-acl-permit.png |
-| 5 | ASA ACL — Deny | DMZ → Internal ping fail | screenshots/05-acl-deny.png |
-| 6 | Static NAT | `show xlate` + browser test | screenshots/06-static-nat.png |
-| 7 | Dynamic PAT | `show xlate` internal → internet | screenshots/07-dynamic-pat.png |
-| 8 | HSRP Active/Standby | `show standby brief` | screenshots/08-hsrp.png |
-| 9 | STP Root Alignment | `show spanning-tree vlan 10` | screenshots/09-stp-root.png |
-| 10 | WLC AP Association | `show ap summary` | screenshots/10-wlc-ap.png |
-| 11 | RADIUS Auth Success | Client on VLAN 92 + `ipconfig` | screenshots/11-radius-success.png |
-| 12 | RADIUS Auth Failure | Wrong credentials rejected | screenshots/12-radius-fail.png |
-| 13 | Guest Isolation | VLAN 94 → internal FAIL + internet OK | screenshots/13-guest-isolation.png |
-| 14 | CME Registration | `show ephone registered` | screenshots/14-cme-voip.png |
-| 15 | DNS Resolution | `nslookup youneslab.local` | screenshots/15-dns.png |
-| 16 | DHCP Snooping | `show ip dhcp snooping binding` | screenshots/16-dhcp-snooping.png |
-| 17 | DAI Statistics | `show ip arp inspection statistics` | screenshots/17-dai.png |
-| 18 | Port Security | `show port-security interface` | screenshots/18-port-security.png |
-| 19 | Syslog Events | 4 event types on INT-MGMT-01 | screenshots/19-syslog.png |
-| 20 | FTP Backup | `copy running-config ftp:` | screenshots/20-ftp-backup.png |
-| 21 | SSH Hardening | `show ssh` + VTY ACL | screenshots/21-ssh.png |
-| 22 | QoS Policy | `show policy-map` | screenshots/22-qos.png |
+# 📸 Validation & Proof Screenshots
 
+All screenshots available in the [`/screenshots`](screenshots/) directory.
+
+| # | Feature | Filename |
+|---|---------|----------|
+| **ASA Security** |||
+| 1 | ASA Static NAT (`show xlate` + browser test) | `screenshots/ASA-nat.png` |
+| 2 | ASA ACL Policy (OUTSIDE_IN + DMZ_POLICY) | `screenshots/acl-ASA.png` |
+| **OSPF Routing** |||
+| 3 | OSPF Neighbors (`show ip ospf neighbor`) | `screenshots/ospf-neighbors.png` |
+| 4 | OSPF Routes (`show ip route ospf`) | `screenshots/ospf-routes.png` |
+| **HSRP + STP Redundancy** |||
+| 5 | HSRP Standby Brief (`show standby brief`) | `screenshots/standby-brief.png` |
+| 6 | STP Root per VLAN (`show spanning-tree vlan 10`) | `screenshots/spanningTree-vlan.png` |
+| 7 | STP Root Summary (`show spanning-tree summary`) | `screenshots/st-summary-root.png` |
+| 8 | STP Access Switch (`show spanning-tree` on ASW) | `screenshots/st-summary-acess-sw.png` |
+| **DMZ Services** |||
+| 9 | DMZ Proxy Forwarder (google.com → 8.8.8.8) | `screenshots/dmz-proxy.png` |
+| **Wireless + RADIUS** |||
+| 10 | RADIUS User Database (INT-DC-01) | `screenshots/raduis-database.png` |
+| 11 | Corporate WiFi Success (VLAN 92) | `screenshots/corp-wifi-success.png` |
+| 12 | Guest WiFi Success (VLAN 94, internet only) | `screenshots/Guest-wifi-success.png` |
+| 13 | WLC AP Associations (`show ap summary`) | `screenshots/wlc-APs-associations.png` |
+| 14 | Corporate WiFi Connecting Screen | `screenshots/copr-connecting.png` |
+| 15 | Guest WiFi Connecting Screen | `screenshots/guest-connecting.png` |
+| 16 | WLC Client Association (GUI) | `screenshots/client-association-wlc-gui.png` |
+| 17 | WLC WLANs (SSID list VLAN 92, 94) | `screenshots/wlans-wlc-gui.png` |
+| 18 | WLC RADIUS Configuration (GUI) | `screenshots/raduis-config-on-wlc-gui.png` |
+| 19 | WLC Interfaces (VLAN mapped) | `screenshots/interfaces-on-wlc-gui.png` |
+| **Split-Horizon DNS** |||
+| 20 | Internal DNS Records (INT-DC-01) | `screenshots/dns-records.png` |
+| 21 | DMZ Proxy DNS Records (google.com → 8.8.8.8) | `screenshots/dns-records-on-dmz-proxy.png` |
+| **Layer 2 Security** |||
+| 22 | DHCP Snooping Binding Table | `screenshots/dhcp-snooping-binding.png` |
+| 23 | Port Security Interface (f0/3) | `screenshots/port-security-interface.png` |
+| 24 | DHCP Pools + Port Security Combined | `screenshots/dhcp-pools+port-sec-interface.png` |
+| 25 | DHCP Pools Configuration | `screenshots/dhcp-pools.png` |
+| **NTP Services** |||
+| 26 | NTP Associations (`show ntp associations`) | `screenshots/ntp-associations.png` |
+| 27 | NTP Status (`show ntp status`) | `screenshots/ntp-status.png` |
+| 28 | NTP Server Service (INT-MGMT-01) | `screenshots/ntp-service-server.png` |
+| 29 | Clock Updated (`show clock` after sync) | `screenshots/clock-updated.png` |
+| **SSH Management** |||
+| 30 | SSH Configuration (`show ip ssh` + `show ssh`) | `screenshots/ssh-config.png` |
+| 31 | SSH Remote Access (mgmt laptop → MLS-Dsw1) | `screenshots/ssh-mgmt-laptop.png` |
+| **Syslog** |||
+| 32 | Syslog Trigger (interface shutdown/no shutdown) | `screenshots/syslog-trigger.png` |
+| 33 | Syslog Server Logs (INT-MGMT-01) | `screenshots/syslog-server-logs.png` |
+| **FTP Backup** |||
+| 34 | FTP Backup Command (`copy running-config ftp:`) | `screenshots/ftp-backup.png` |
+| 35 | FTP Server Database (file confirmed) | `screenshots/fts-server-database.png` |
+| **SMTP Email** |||
+| 36 | SMTP External → Internal Messaging | `screenshots/smtp-external.png` |
+| 37 | SMTP Internal → Internal (Sales ↔ IT) | `screenshots/smtp-internal.png` |
+| **SNMP Monitoring** |||
+| 38 | SNMP GET — sysUpTime | `screenshots/snmp-get-sysuptime.png` |
+| 39 | SNMP GET — sysName (CME hostname) | `screenshots/snmp-get-sysname.png` |
+| 40 | SNMP GET — ifDescr (interface description) | `screenshots/snmp-get-ifdescr.png` |
+| 41 | SNMP SET — Change Hostname (Step 1) | `screenshots/snmp-set-hostname1.png` |
+| 42 | SNMP SET — Change Hostname (Step 2) | `screenshots/snmp-set-hostname.png` |
+| 43 | SNMP SET — Verify on CME CLI | `screenshots/snmp-set-verify.png` |
+| **VoIP — CME** |||
+| 44 | CME Registered Phones (`show ephone registered`) | `screenshots/cme-ephone-registered.png` |
+| 45 | CME Phone Summary (`show ephone summary`) | `screenshots/cme-ephone-summary.png` |
+| 46 | VoIP Call — Dialing Extension | `screenshots/voip-call-dialing.png` |
+| 47 | VoIP Call — Ringing | `screenshots/voip-call-ringing.png` |
+| 48 | VoIP Call — Connected | `screenshots/voip-call-connected.png` |
+| **QoS — Quality of Service** |||
+| 49 | QoS Access Switch Trust (`show mls qos int f0/3`) | `screenshots/qos-access-sw-trust.png` |
+| 50 | QoS Core Policy Map (`show policy-map`) | `screenshots/qos-core-policymap.png` |
+| 51 | QoS Bug — DSCP 0x00 (Before fix) | `screenshots/qos-bug-dscp-00.png` |
+| 52 | QoS Bug — Port Security + Trust Configured | `screenshots/qos-accesss-port-trust-qos.png` |
+| 53 | QoS Distribution ACL + Class-Map | `screenshots/qos-distribution-acl.png` |
+| 54 | QoS Distribution Remark — DSCP 0x2e Added | `screenshots/qos-dis-remark.png` |
+| 55 | QoS Core Verify — Packets Matched (1) | `screenshots/qos-core-verify1.png` |
+| 56 | QoS Core Verify — Packets Matched (2) | `screenshots/qos-core-verify2.png` |
+| 57 | QoS Core DSCP Preserved (0x2e) | `screenshots/qos-core-dscp-preserved.png` |
+| **Printers** |||
+| 58 | Printer Ping Test (Cross-site) | `screenshots/printer-pint-test.png` |
+| **Internet Core Router** |||
+| 59 | Internet Core Default Routes (`show run \| include ip route`) | `screenshots/internet-core-default-routes.png` |
 ---
 
 ##  Repository Structure
