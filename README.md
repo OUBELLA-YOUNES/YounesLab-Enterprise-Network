@@ -927,6 +927,8 @@ All screenshots available in the [`/screenshots`](screenshots/) directory.
 | 59 | Internet Core Default Routes (`show run \| include ip route`) | `screenshots/internet-core-default-routes.png` |
 ---
 
+```
+
 youneslab-enterprise-network/
 │
 ├── README.md                          ← You are here
